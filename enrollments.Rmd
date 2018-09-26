@@ -8,12 +8,16 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(knitr)
 ```
 
-```{r}
+```{r, echo=FALSE}
 x <- read_rds("enrollment.rds") %>% 
-  select(course_name, u_grad)
+  filter(! is.na(course_name)) %>% 
+  select(course_name, u_grad) %>% 
+  arrange(desc(u_grad))
 
-x
+
+x %>% kable()
 ```
 
